@@ -1,0 +1,102 @@
+# Updated code for sending the email using Gmail SMTP
+import smtplib
+import tkinter as tk
+from tkinter import messagebox
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+import os
+
+class PhishingSimulator:
+    def __init__(self):
+        self.window = tk.Tk()
+        self.window.title("Phishing Campaign Simulator")
+        self.setup_gui()
+
+    def setup_gui(self):
+        tk.Label(self.window, text="Gmail Account:").grid(row=0, column=0)
+        self.gmail_account = tk.Entry(self.window)
+        self.gmail_account.grid(row=0, column=1)
+
+        tk.Label(self.window, text="Gmail App Password:").grid(row=1, column=0)
+        self.gmail_password = tk.Entry(self.window, show="*")
+        self.gmail_password.grid(row=1, column=1)
+
+        tk.Label(self.window, text="Receiver Email:").grid(row=2, column=0)
+        self.receiver_email = tk.Entry(self.window)
+        self.receiver_email.grid(row=2, column=1)
+
+        self.text_editor_label = tk.Label(self.window, text="Compose Email:")
+        self.text_editor_label.grid(row=3, column=0)
+
+        self.email_body = tk.Text(self.window, height=10, width=50)
+        self.email_body.grid(row=4, column=0, columnspan=2)
+
+        tk.Button(self.window, text="Insert Link", command=self.insert_link).grid(row=5, column=0)
+        tk.Button(self.window, text="Attach File", command=self.attach_file).grid(row=5, column=1)
+
+        self.send_button = tk.Button(self.window, text="Send Phishing Email", command=self.send_email)
+        self.send_button.grid(row=6, column=0, columnspan=2)
+
+        self.status_label = tk.Label(self.window, text="Status: Ready to send", fg="green")
+        self.status_label.grid(row=7, column=0, columnspan=2)
+
+    def insert_link(self):
+        link = tk.simpledialog.askstring("Insert Link", "Enter the link to insert:")
+        current_content = self.email_body.get("1.0", tk.END)
+        self.email_body.delete("1.0", tk.END)
+        self.email_body.insert(tk.END, current_content + f"\n<a href='{link}'>Click here</a>")
+
+    def attach_file(self):
+        file_path = tk.filedialog.askopenfilename(title="Select file to attach")
+        if file_path:
+            self.attached_file = file_path
+        else:
+            self.attached_file = None
+
+    def send_email(self):
+        sender_email = self.gmail_account.get()
+        password = self.gmail_password.get()  # This should be your App Password if you have 2FA enabled
+        receiver_email = self.receiver_email.get()
+        email_content = self.email_body.get("1.0", tk.END)
+
+        try:
+            # Connect to Gmail SMTP server
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(sender_email, password)
+
+            # Set up the email parameters
+            msg = MIMEMultipart()
+            msg['From'] = sender_email
+            msg['To'] = receiver_email
+            msg['Subject'] = "Important Notification"
+
+            msg.attach(MIMEText(email_content, 'html'))
+
+            if self.attached_file:
+                part = MIMEBase('application', 'octet-stream')
+                with open(self.attached_file, 'rb') as file:
+                    part.set_payload(file.read())
+                    encoders.encode_base64(part)
+                    part.add_header('Content-Disposition', f'attachment; filename={os.path.basename(self.attached_file)}')
+                    msg.attach(part)
+
+            # Send the email
+            server.sendmail(sender_email, receiver_email, msg.as_string())
+            server.quit()
+
+            self.status_label.config(text="Status: Email sent successfully", fg="green")
+            messagebox.showinfo("Success", "Email sent successfully!")
+
+        except Exception as e:
+            self.status_label.config(text=f"Status: Failed to send email ({str(e)})", fg="red")
+            messagebox.showerror("Error", f"Failed to send email: {str(e)}")
+
+    def run(self):
+        self.window.mainloop()
+
+if __name__ == "__main__":
+    app = PhishingSimulator()
+    app.run()
