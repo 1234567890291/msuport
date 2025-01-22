@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Certificate</title>
+    <style>
+        body {
+            background-color: #e9ecef;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .certificate {
+            position: relative;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 900px; 
+            height: 600px; 
+            padding: 50px; 
+            overflow: hidden;
+            border: 5px solid #007bff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            color: rgba(0, 123, 255, 0.1);
+            font-weight: bold;
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 150px; 
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #007bff;
+            font-size: 40px;
+            margin: 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .content {
+            margin: 30px 0; 
+            text-align: center; 
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .content h2 {
+            font-size: 28px;
+            margin: 10px 0;
+            font-weight: 400;
+        }
+
+        .user-name {
+            font-size: 36px;
+            font-weight: bold;
+            color: #007bff;
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+
+        .certification-name {
+            font-size: 32px;
+            font-weight: bold;
+            color: #007bff;
+            margin: 10px 0;
+        }
+
+        .content p {
+            font-size: 22px;
+            margin: 10px 0;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .date {
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 22px;
+            font-weight: 500;
+            color: #007bff;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .signature {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20%;
+        }
+
+        .signature-line {
+            border-top: 2px solid #000;
+            width: 19rem;
+            text-align: center;
+            position: relative;
+        }
+        .signature img {
+            width: 150px; /* Adjusted size for better fitting */
+            height: auto;
+            position: absolute;
+            top: -40px; /* Increased space from the signature line */
+            left: 25%; /* Added space from the left side */
+            transform: translateX(-20%);
+        }
+
+
+        /* Decorative Border */
+        .border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            pointer-events: none;
+            z-index: -1;
+            background: url('https://www.transparenttextures.com/patterns/white-linen.png');
+            opacity: 0.3;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .certificate {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate">
+        <div class="border"></div>
+        <div class="watermark"> C|OSINT</div>
+        <div class="header">
+            <img src="https://cdn.worldvectorlogo.com/logos/osint-1.svg" alt="OSINT Logo" class="logo">
+            <h1>Certificate of Completion</h1>
+        </div>
+        <div class="content">
+            <h2 class="certification-name">OSINT Training Program</h2>
+            <h2>This certifies that</h2>
+            <h3 class="user-name">Muhammad Sudais Usmani</h3>
+            <p>has successfully completed the OSINT (Open Source Intelligence) training program.</p>
+            <p class="date">Issued on: October 25, 2024</p>
+        </div>
+        <div class="footer">
+            <div class="signature">
+                <div class="signature-line">
+                    <img src="images/cyber-sign.png" alt="Signature">
+                </div>
+            </div>
+            <p>Signature</p>
+        </div>
+    </div>
+</body>
+</html>
