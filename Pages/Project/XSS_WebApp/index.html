@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Multi-Payload XSS Tester</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            color: #333333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            width: 95%;
+            margin-top: 50px;
+            padding: 20px 30px;
+        }
+        h1 {
+            font-size: 28px;
+            text-align: center;
+            color: #222222;
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: 500;
+            margin-top: 15px;
+            display: block;
+            font-size: 16px;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            font-size: 14px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            background: #ffffff;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease-in-out;
+        }
+        textarea:focus, input:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        button.primary {
+            background-color: #0056b3;
+            color: #ffffff;
+        }
+        button.primary:hover {
+            background-color: #004080;
+        }
+        button.secondary {
+            background-color: #e0e0e0;
+            color: #333333;
+        }
+        button.secondary:hover {
+            background-color: #bdbdbd;
+        }
+        .output-section {
+            margin-top: 30px;
+        }
+        .output-links {
+            margin-top: 20px;
+            background: #ffffff;
+            border: 1px solid #dddddd;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+        .output-link {
+            padding: 10px;
+            border-bottom: 1px solid #dddddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            word-break: break-word;
+        }
+        .output-link:last-child {
+            border-bottom: none;
+        }
+        .actions button {
+            margin-left: 10px;
+        }
+        .actions button.copy {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+        .actions button.copy:hover {
+            background-color: #1e7e34;
+        }
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background: #f0f0f0;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #555555;
+        }
+        footer a {
+            color: #0056b3;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #004080;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Advanced Multi-Payload XSS Tester</h1>
+        <label for="baseUrlInput">Enter Base URL:</label>
+        <input id="baseUrlInput" type="text" placeholder="Enter the base URL (e.g., https://example.com/)">
+        
+        <label for="payloadInput">Enter XSS Payloads (one per line):</label>
+        <textarea id="payloadInput" placeholder="Enter each XSS payload on a new line..."></textarea>
+        
+        <label for="linkValue">Enter Link Value for "Open All Links":</label>
+        <input id="linkValue" type="text" placeholder="Enter the value to append to each link">
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="primary" onclick="generateLinks()">Generate Links</button>
+            <button class="secondary" onclick="clearBoxes()">Clear</button>
+            <button class="primary" onclick="openAllLinks()">Open All Links</button>
+        </div>
+        
+        <div class="output-section">
+            <h3>Generated Links:</h3>
+            <div id="outputLinks" class="output-links"></div>
+        </div>
+    </div>
+    <footer>
+        <p>Connect with me:</p>
+        <a href="https://www.linkedin.com/in/muhammad-sudais-usmani-950889311/" target="_blank">LinkedIn</a> | 
+        <a href="https://github.com/Dit-Developers/" target="_blank">GitHub</a>
+    </footer>
+    <script>
+        function generateLinks() {
+            const baseUrl = document.getElementById('baseUrlInput').value.trim();
+            const payloads = document.getElementById('payloadInput').value.split('\n').map(p => p.trim());
+            const linkValue = document.getElementById('linkValue').value.trim();
+            const outputContainer = document.getElementById('outputLinks');
+            
+            outputContainer.innerHTML = '';
+
+            if (!baseUrl) {
+                alert('Please enter a valid base URL.');
+                return;
+            }
+
+            payloads.forEach(payload => {
+                if (!payload) return;
+
+                let generatedUrl = `${baseUrl}${payload}`;
+                if (linkValue) {
+                    generatedUrl += `?link_value=${linkValue}`;
+                }
+
+                const linkContainer = document.createElement('div');
+                linkContainer.className = 'output-link';
+
+                const link = document.createElement('a');
+                link.href = generatedUrl;
+                link.target = '_blank';
+                link.textContent = generatedUrl;
+
+                const actions = document.createElement('div');
+                actions.className = 'actions';
+
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy';
+                copyButton.textContent = 'Copy';
+                copyButton.onclick = () => {
+                    navigator.clipboard.writeText(generatedUrl).then(() => {
+                        alert('Copied to clipboard');
+                    }).catch(() => {
+                        alert('Failed to copy');
+                    });
+                };
+                actions.appendChild(copyButton);
+
+                linkContainer.appendChild(link);
+                linkContainer.appendChild(actions);
+                outputContainer.appendChild(linkContainer);
+            });
+
+            if (outputContainer.innerHTML === '') {
+                outputContainer.innerHTML = '<p>No valid payloads entered.</p>';
+            }
+        }
+
+        function openAllLinks() {
+            const links = document.querySelectorAll('.output-link a');
+            links.forEach(link => {
+                window.open(link.href, '_blank');
+            });
+        }
+
+        function clearBoxes() {
+            document.getElementById('baseUrlInput').value = '';
+            document.getElementById('payloadInput').value = '';
+            document.getElementById('linkValue').value = '';
+            document.getElementById('outputLinks').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
