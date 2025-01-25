@@ -1,0 +1,2 @@
+URL For Request : "https://duckduckgo8.p.rapidapi.com/"
+API-KEY : "f98e96f596msh9081e59d4bc3f09p19d9dejsn9d68dca27b60"
